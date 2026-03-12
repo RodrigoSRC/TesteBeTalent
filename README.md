@@ -29,16 +29,16 @@ API RESTful construída com **AdonisJS 6** para processamento de pagamentos mult
 
 ## Tecnologias
 
-| Camada | Tecnologia |
-|--------|-----------|
-| Framework | AdonisJS 6 |
-| ORM | Lucid (AdonisJS) |
-| Validação | VineJS |
-| Autenticação | `@adonisjs/auth` (Bearer token / API tokens) |
-| Banco de dados | MySQL 8.0 |
-| Testes | Japa (TDD funcional) |
-| Containerização | Docker + Docker Compose |
-| Linguagem | TypeScript 5 |
+| Camada          | Tecnologia                                   |
+| --------------- | -------------------------------------------- |
+| Framework       | AdonisJS 6                                   |
+| ORM             | Lucid (AdonisJS)                             |
+| Validação       | VineJS                                       |
+| Autenticação    | `@adonisjs/auth` (Bearer token / API tokens) |
+| Banco de dados  | MySQL 8.0                                    |
+| Testes          | Japa (TDD funcional)                         |
+| Containerização | Docker + Docker Compose                      |
+| Linguagem       | TypeScript 5                                 |
 
 ---
 
@@ -74,12 +74,14 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 ### Com Docker (recomendado)
 
 1. **Clone o repositório:**
+
    ```bash
    git clone <url-do-repositorio>
    cd <pasta-do-projeto>
    ```
 
 2. **Configure o `.env`:**
+
    ```bash
    cp .env.example .env
    # Gere uma APP_KEY:
@@ -88,6 +90,7 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
    ```
 
 3. **Suba os containers:**
+
    ```bash
    docker compose up -d
    ```
@@ -98,6 +101,7 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
    - `betalent-gateways` — Servidores mock dos gateways nas portas `3001` e `3002`
 
 4. **Execute as migrations e seeders:**
+
    ```bash
    docker exec betalent-app node ace migration:run
    docker exec betalent-app node ace db:seed
@@ -109,6 +113,7 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
    ```
 
 > **Credenciais padrão do admin** (criadas pelo seeder):
+>
 > - Email: `admin@betalent.com`
 > - Senha: `Admin@123`
 
@@ -117,20 +122,25 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 ### Sem Docker (local)
 
 1. **Instale as dependências:**
+
    ```bash
    npm install
    ```
 
 2. **Configure o `.env`:**
+
    ```bash
    cp .env.example .env
    ```
+
    Edite o `.env` com as credenciais do seu MySQL local e gere a `APP_KEY`:
+
    ```bash
    node ace generate:key
    ```
 
 3. **Execute as migrations e seeders:**
+
    ```bash
    node ace migration:run
    node ace db:seed
@@ -145,24 +155,25 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 
 ## Variáveis de Ambiente
 
-| Variável | Descrição | Exemplo |
-|----------|-----------|---------|
-| `APP_KEY` | Chave de criptografia da aplicação (obrigatória) | `base64:...` |
-| `PORT` | Porta HTTP da aplicação | `3333` |
-| `HOST` | Host da aplicação | `localhost` |
-| `NODE_ENV` | Ambiente (`development`/`production`/`test`) | `development` |
-| `DB_HOST` | Host do MySQL | `127.0.0.1` |
-| `DB_PORT` | Porta do MySQL | `3306` |
-| `DB_USER` | Usuário do MySQL | `root` |
-| `DB_PASSWORD` | Senha do MySQL | `root` |
-| `DB_DATABASE` | Nome do banco | `betalent` |
-| `LOG_LEVEL` | Nível de log | `info` |
+| Variável      | Descrição                                        | Exemplo       |
+| ------------- | ------------------------------------------------ | ------------- |
+| `APP_KEY`     | Chave de criptografia da aplicação (obrigatória) | `base64:...`  |
+| `PORT`        | Porta HTTP da aplicação                          | `3333`        |
+| `HOST`        | Host da aplicação                                | `localhost`   |
+| `NODE_ENV`    | Ambiente (`development`/`production`/`test`)     | `development` |
+| `DB_HOST`     | Host do MySQL                                    | `127.0.0.1`   |
+| `DB_PORT`     | Porta do MySQL                                   | `3306`        |
+| `DB_USER`     | Usuário do MySQL                                 | `root`        |
+| `DB_PASSWORD` | Senha do MySQL                                   | `root`        |
+| `DB_DATABASE` | Nome do banco                                    | `betalent`    |
+| `LOG_LEVEL`   | Nível de log                                     | `info`        |
 
 ---
 
 ## Rotas da API
 
 A base URL é `http://localhost:3333`. Rotas marcadas com 🔒 exigem o header:
+
 ```
 Authorization: Bearer <token>
 ```
@@ -172,9 +183,11 @@ Authorization: Bearer <token>
 ### Autenticação
 
 #### `POST /login`
+
 Autentica um usuário e retorna um Bearer token.
 
 **Body:**
+
 ```json
 {
   "email": "admin@betalent.com",
@@ -183,6 +196,7 @@ Autentica um usuário e retorna um Bearer token.
 ```
 
 **Resposta `200`:**
+
 ```json
 {
   "token": {
@@ -195,6 +209,7 @@ Autentica um usuário e retorna um Bearer token.
 ---
 
 #### `POST /logout` 🔒
+
 Revoga o token atual.
 
 **Resposta `200`:** `{ "message": "Logged out" }`
@@ -205,15 +220,16 @@ Revoga o token atual.
 
 > Todas as rotas de usuários exigem autenticação 🔒.
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `GET` | `/users` | Lista todos os usuários |
-| `GET` | `/users/:id` | Detalhe de um usuário |
-| `POST` | `/users` | Cria um usuário |
-| `PUT` | `/users/:id` | Atualiza um usuário |
-| `DELETE` | `/users/:id` | Remove um usuário |
+| Método   | Rota         | Descrição               |
+| -------- | ------------ | ----------------------- |
+| `GET`    | `/users`     | Lista todos os usuários |
+| `GET`    | `/users/:id` | Detalhe de um usuário   |
+| `POST`   | `/users`     | Cria um usuário         |
+| `PUT`    | `/users/:id` | Atualiza um usuário     |
+| `DELETE` | `/users/:id` | Remove um usuário       |
 
 **Body `POST /users`:**
+
 ```json
 {
   "email": "novo@exemplo.com",
@@ -223,6 +239,7 @@ Revoga o token atual.
 ```
 
 **Body `PUT /users/:id`** (todos os campos opcionais):
+
 ```json
 {
   "email": "atualizado@exemplo.com",
@@ -236,21 +253,23 @@ Revoga o token atual.
 
 > Todas as rotas de produtos exigem autenticação 🔒.
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `GET` | `/products` | Lista todos os produtos |
-| `GET` | `/products/:id` | Detalhe de um produto |
-| `POST` | `/products` | Cria um produto |
-| `PUT` | `/products/:id` | Atualiza um produto |
-| `DELETE` | `/products/:id` | Remove um produto |
+| Método   | Rota            | Descrição               |
+| -------- | --------------- | ----------------------- |
+| `GET`    | `/products`     | Lista todos os produtos |
+| `GET`    | `/products/:id` | Detalhe de um produto   |
+| `POST`   | `/products`     | Cria um produto         |
+| `PUT`    | `/products/:id` | Atualiza um produto     |
+| `DELETE` | `/products/:id` | Remove um produto       |
 
 **Body `POST /products`:**
+
 ```json
 {
   "name": "Camiseta BeTalent",
   "amount": 4990
 }
 ```
+
 > `amount` é em **centavos** (ex: `4990` = R$49,90).
 
 ---
@@ -259,12 +278,13 @@ Revoga o token atual.
 
 > Exigem autenticação 🔒.
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `GET` | `/clients` | Lista todos os clientes |
-| `GET` | `/clients/:id` | Detalhe do cliente + histórico de compras |
+| Método | Rota           | Descrição                                 |
+| ------ | -------------- | ----------------------------------------- |
+| `GET`  | `/clients`     | Lista todos os clientes                   |
+| `GET`  | `/clients/:id` | Detalhe do cliente + histórico de compras |
 
 **Resposta `GET /clients/:id`:**
+
 ```json
 {
   "id": 1,
@@ -287,10 +307,12 @@ Revoga o token atual.
 
 ### Compras
 
-#### `POST /purchases` *(pública — sem autenticação)*
+#### `POST /purchases` _(pública — sem autenticação)_
+
 Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity`), cria ou reutiliza o cliente pelo e-mail e tenta processar o pagamento pelos gateways ativos em ordem de prioridade.
 
 **Body:**
+
 ```json
 {
   "productId": 1,
@@ -307,6 +329,7 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 ```
 
 **Resposta `201`:**
+
 ```json
 {
   "transactionId": 1,
@@ -318,6 +341,7 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 ```
 
 **Erros:**
+
 - `404` — Produto não encontrado
 - `422` — Dados inválidos (número do cartão com tamanho errado, email inválido, campos faltando...)
 - `422` — Todos os gateways falharam
@@ -328,13 +352,14 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 
 > Exigem autenticação 🔒.
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `GET` | `/transactions` | Lista todas as transações |
-| `GET` | `/transactions/:id` | Detalhe de uma transação |
+| Método | Rota                       | Descrição                           |
+| ------ | -------------------------- | ----------------------------------- |
+| `GET`  | `/transactions`            | Lista todas as transações           |
+| `GET`  | `/transactions/:id`        | Detalhe de uma transação            |
 | `POST` | `/transactions/:id/refund` | Solicita reembolso de uma transação |
 
 **Resposta `GET /transactions/:id`:**
+
 ```json
 {
   "id": 1,
@@ -350,6 +375,7 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 ```
 
 **`POST /transactions/:id/refund`:**
+
 - Transação deve estar com `status = "paid"`
 - Chama o endpoint de chargeback/reembolso do gateway correto
 - Atualiza o status para `"refunded"`
@@ -361,9 +387,9 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 
 > Exigem autenticação 🔒.
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| `PATCH` | `/gateways/:id/toggle` | Ativa ou desativa um gateway |
+| Método  | Rota                     | Descrição                         |
+| ------- | ------------------------ | --------------------------------- |
+| `PATCH` | `/gateways/:id/toggle`   | Ativa ou desativa um gateway      |
 | `PATCH` | `/gateways/:id/priority` | Altera a prioridade de um gateway |
 
 ---
@@ -453,17 +479,17 @@ node ace test --files="tests/functional/purchase.spec.ts"
 
 **Cobertura atual:** 60 testes, todos passando ✓
 
-| Suite | Testes |
-|-------|--------|
-| Auth — Login | 5 |
-| Auth — Rotas protegidas | 3 |
-| Listagem de Clientes | 6 |
-| GatewayService — charge | 6 |
-| GatewayService — refund | 3 |
-| CRUD de Produtos | 9 |
-| POST /purchases | 10 |
-| POST /transactions/:id/refund | 5 |
-| GET /transactions | 3 |
-| GET /transactions/:id | 3 |
-| CRUD de Usuários | 7 |
-| **Total** | **60** |
+| Suite                         | Testes |
+| ----------------------------- | ------ |
+| Auth — Login                  | 5      |
+| Auth — Rotas protegidas       | 3      |
+| Listagem de Clientes          | 6      |
+| GatewayService — charge       | 6      |
+| GatewayService — refund       | 3      |
+| CRUD de Produtos              | 9      |
+| POST /purchases               | 10     |
+| POST /transactions/:id/refund | 5      |
+| GET /transactions             | 3      |
+| GET /transactions/:id         | 3      |
+| CRUD de Usuários              | 7      |
+| **Total**                     | **60** |

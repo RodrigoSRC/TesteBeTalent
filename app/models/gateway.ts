@@ -1,4 +1,3 @@
-// import { GatewaySchema } from '#database/schema'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
@@ -24,5 +23,5 @@ export default class Gateway extends BaseModel {
   declare updatedAt: DateTime
 
   @hasMany(() => Transaction)
-  declare transaction: HasMany<typeof Transaction>
+  declare transactions: HasMany<typeof Transaction>
 }

@@ -2,10 +2,6 @@ import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
 
-router.get('/', () => {
-  return { hello: 'world' }
-})
-
 /**
  * Rotas públicas
  */
@@ -18,6 +14,7 @@ router.post('/purchases', [controllers.Purchase, 'store'])
 router
   .group(() => {
     router.post('/logout', [controllers.AccessToken, 'destroy'])
+
     // CRUD Usuários
     router.get('/users', [controllers.User, 'index'])
     router.get('/users/:id', [controllers.User, 'show'])
@@ -40,5 +37,9 @@ router
     router.get('/transactions', [controllers.Transaction, 'index'])
     router.get('/transactions/:id', [controllers.Transaction, 'show'])
     router.post('/transactions/:id/refund', [controllers.Transaction, 'refund'])
+
+    // Gateways
+    router.patch('/gateways/:id/toggle', [controllers.Gateway, 'toggle'])
+    router.patch('/gateways/:id/priority', [controllers.Gateway, 'priority'])
   })
   .use(middleware.auth())

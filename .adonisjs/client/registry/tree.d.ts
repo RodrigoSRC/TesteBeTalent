@@ -6,6 +6,9 @@ export interface ApiDefinition {
     store: typeof routes['access_token.store']
     destroy: typeof routes['access_token.destroy']
   }
+  purchase: {
+    store: typeof routes['purchase.store']
+  }
   user: {
     index: typeof routes['user.index']
     show: typeof routes['user.show']
@@ -23,5 +26,14 @@ export interface ApiDefinition {
   client: {
     index: typeof routes['client.index']
     show: typeof routes['client.show']
+  }
+  transaction: {
+    index: typeof routes['transaction.index']
+    show: typeof routes['transaction.show']
+    refund: typeof routes['transaction.refund']
+  }
+  gateway: {
+    toggle: typeof routes['gateway.toggle']
+    priority: typeof routes['gateway.priority']
   }
 }

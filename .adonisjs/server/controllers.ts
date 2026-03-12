@@ -6,9 +6,8 @@
 export const controllers = {
   AccessToken: () => import('#controllers/access_token_controller'),
   Client: () => import('#controllers/client_controller'),
-  NewAccount: () => import('#controllers/new_account_controller'),
+  Gateway: () => import('#controllers/gateway_controller'),
   Product: () => import('#controllers/product_controller'),
-  Profile: () => import('#controllers/profile_controller'),
   Purchase: () => import('#controllers/purchase_controller'),
   Transaction: () => import('#controllers/transaction_controller'),
   User: () => import('#controllers/user_controller'),

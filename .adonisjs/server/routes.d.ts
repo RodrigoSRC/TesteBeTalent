@@ -11,25 +11,37 @@ export type ScannedRoutes = {
     'user.store': { paramsTuple?: []; params?: {} }
     'user.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'user.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.index': { paramsTuple?: []; params?: {} }
+    'product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.store': { paramsTuple?: []; params?: {} }
+    'product.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'user.index': { paramsTuple?: []; params?: {} }
     'user.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.index': { paramsTuple?: []; params?: {} }
+    'product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'user.index': { paramsTuple?: []; params?: {} }
     'user.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.index': { paramsTuple?: []; params?: {} }
+    'product.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'access_token.store': { paramsTuple?: []; params?: {} }
     'access_token.destroy': { paramsTuple?: []; params?: {} }
     'user.store': { paramsTuple?: []; params?: {} }
+    'product.store': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'user.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
     'user.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'product.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

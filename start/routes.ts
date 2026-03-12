@@ -23,5 +23,12 @@ router
     router.post('/users', [controllers.User, 'store'])
     router.put('/users/:id', [controllers.User, 'update'])
     router.delete('/users/:id', [controllers.User, 'destroy'])
+
+    // CRUD Produtos
+    router.get('/products', [controllers.Product, 'index'])
+    router.get('/products/:id', [controllers.Product, 'show'])
+    router.post('/products', [controllers.Product, 'store'])
+    router.put('/products/:id', [controllers.Product, 'update'])
+    router.delete('/products/:id', [controllers.Product, 'destroy'])
   })
   .use(middleware.auth())

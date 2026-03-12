@@ -91,4 +91,64 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/user_controller').default['destroy']>>>
     }
   }
+  'product.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/products'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['index']>>>
+    }
+  }
+  'product.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/products/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['show']>>>
+    }
+  }
+  'product.store': {
+    methods: ["POST"]
+    pattern: '/products'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/product').createProductValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/product').createProductValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'product.update': {
+    methods: ["PUT"]
+    pattern: '/products/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/product').updateProductValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/product').updateProductValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'product.destroy': {
+    methods: ["DELETE"]
+    pattern: '/products/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/product_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/product_controller').default['destroy']>>>
+    }
+  }
 }

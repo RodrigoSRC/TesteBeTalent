@@ -17,5 +17,11 @@ router.post('/login', [controllers.AccessToken, 'store'])
 router
   .group(() => {
     router.post('/logout', [controllers.AccessToken, 'destroy'])
+    // CRUD Usuários
+    router.get('/users', [controllers.User, 'index'])
+    router.get('/users/:id', [controllers.User, 'show'])
+    router.post('/users', [controllers.User, 'store'])
+    router.put('/users/:id', [controllers.User, 'update'])
+    router.delete('/users/:id', [controllers.User, 'destroy'])
   })
   .use(middleware.auth())

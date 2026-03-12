@@ -35,5 +35,9 @@ router
     // Clientes
     router.get('/clients', [controllers.Client, 'index'])
     router.get('/clients/:id', [controllers.Client, 'show'])
+
+    // Transações
+    router.get('/transactions', [controllers.Transaction, 'index'])
+    router.get('/transactions/:id', [controllers.Transaction, 'show'])
   })
   .use(middleware.auth())

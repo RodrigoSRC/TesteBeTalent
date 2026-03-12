@@ -28,7 +28,7 @@ test.group('Auth - Login', (group) => {
   test('should return 422 when email is missing', async ({ client }) => {
     const response = await client.post('/login').json({
       password: 'secret123',
-    })
+    } as any)
 
     response.assertStatus(422)
   })
@@ -36,7 +36,7 @@ test.group('Auth - Login', (group) => {
   test('should return 422 when password is missing', async ({ client }) => {
     const response = await client.post('/login').json({
       email: 'admin@betalent.tech',
-    })
+    } as any)
 
     response.assertStatus(422)
   })

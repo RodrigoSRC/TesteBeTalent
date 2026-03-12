@@ -37,6 +37,8 @@ services:
       - APP_KEY=${APP_KEY}
       - LOG_LEVEL=info
       - SESSION_DRIVER=memory
+      - GATEWAY1_URL=http://gateways:3001
+      - GATEWAY2_URL=http://gateways:3002
     depends_on:
       mysql:
         condition: service_healthy

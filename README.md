@@ -54,7 +54,6 @@ app/
 │       ├── contracts/         # Interface GatewayProvider
 │       ├── providers/         # Gateway1Provider, Gateway2Provider
 │       └── gateway_service.ts # Orquestrador multi-gateway com fallback
-├── transformers/      # Serialização de resposta (ex: UserTransformer)
 └── validators/        # Schemas VineJS de validação de entrada
 ```
 
@@ -114,8 +113,8 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 
 > **Credenciais padrão do admin** (criadas pelo seeder):
 >
-> - Email: `admin@betalent.com`
-> - Senha: `Admin@123`
+> - Email: `admin@betalent.tech`
+> - Senha: `secret123`
 
 ---
 
@@ -155,18 +154,20 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 
 ## Variáveis de Ambiente
 
-| Variável      | Descrição                                        | Exemplo       |
-| ------------- | ------------------------------------------------ | ------------- |
-| `APP_KEY`     | Chave de criptografia da aplicação (obrigatória) | `base64:...`  |
-| `PORT`        | Porta HTTP da aplicação                          | `3333`        |
-| `HOST`        | Host da aplicação                                | `localhost`   |
-| `NODE_ENV`    | Ambiente (`development`/`production`/`test`)     | `development` |
-| `DB_HOST`     | Host do MySQL                                    | `127.0.0.1`   |
-| `DB_PORT`     | Porta do MySQL                                   | `3306`        |
-| `DB_USER`     | Usuário do MySQL                                 | `root`        |
-| `DB_PASSWORD` | Senha do MySQL                                   | `root`        |
-| `DB_DATABASE` | Nome do banco                                    | `betalent`    |
-| `LOG_LEVEL`   | Nível de log                                     | `info`        |
+| Variável       | Descrição                                                     | Exemplo                |
+| -------------- | ------------------------------------------------------------- | ---------------------- |
+| `APP_KEY`      | Chave de criptografia da aplicação (obrigatória)              | `base64:...`           |
+| `PORT`         | Porta HTTP da aplicação                                       | `3333`                 |
+| `HOST`         | Host da aplicação                                             | `localhost`            |
+| `NODE_ENV`     | Ambiente (`development`/`production`/`test`)                  | `development`          |
+| `DB_HOST`      | Host do MySQL                                                 | `127.0.0.1`            |
+| `DB_PORT`      | Porta do MySQL                                                | `3306`                 |
+| `DB_USER`      | Usuário do MySQL                                              | `root`                 |
+| `DB_PASSWORD`  | Senha do MySQL                                                | `root`                 |
+| `DB_DATABASE`  | Nome do banco                                                 | `betalent`             |
+| `LOG_LEVEL`    | Nível de log                                                  | `info`                 |
+| `GATEWAY1_URL` | URL do Gateway 1 (opcional, default: `http://localhost:3001`) | `http://gateways:3001` |
+| `GATEWAY2_URL` | URL do Gateway 2 (opcional, default: `http://localhost:3002`) | `http://gateways:3002` |
 
 ---
 
@@ -190,8 +191,8 @@ Autentica um usuário e retorna um Bearer token.
 
 ```json
 {
-  "email": "admin@betalent.com",
-  "password": "Admin@123"
+  "email": "admin@betalent.tech",
+  "password": "secret123"
 }
 ```
 
@@ -233,8 +234,7 @@ Revoga o token atual.
 ```json
 {
   "email": "novo@exemplo.com",
-  "password": "Senha123",
-  "passwordConfirmation": "Senha123"
+  "password": "Senha1234"
 }
 ```
 
@@ -391,6 +391,42 @@ Realiza uma compra. O sistema calcula o valor total (`produto.amount × quantity
 | ------- | ------------------------ | --------------------------------- |
 | `PATCH` | `/gateways/:id/toggle`   | Ativa ou desativa um gateway      |
 | `PATCH` | `/gateways/:id/priority` | Altera a prioridade de um gateway |
+
+**`PATCH /gateways/:id/toggle`:**
+
+Alterna o estado `is_active` do gateway. Não requer body.
+
+**Resposta `200`:**
+
+```json
+{
+  "id": 1,
+  "name": "Gateway 1",
+  "isActive": false,
+  "priority": 1
+}
+```
+
+**`PATCH /gateways/:id/priority`:**
+
+**Body:**
+
+```json
+{
+  "priority": 2
+}
+```
+
+**Resposta `200`:**
+
+```json
+{
+  "id": 1,
+  "name": "Gateway 1",
+  "isActive": true,
+  "priority": 2
+}
+```
 
 ---
 

@@ -10,6 +10,7 @@ router.get('/', () => {
  * Rotas públicas
  */
 router.post('/login', [controllers.AccessToken, 'store'])
+router.post('/purchases', [controllers.Purchase, 'store'])
 
 /**
  * Rotas protegidas (requerem autenticação via Bearer token)

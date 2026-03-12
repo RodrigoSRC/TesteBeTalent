@@ -10,5 +10,6 @@ export const controllers = {
   Product: () => import('#controllers/product_controller'),
   Profile: () => import('#controllers/profile_controller'),
   Purchase: () => import('#controllers/purchase_controller'),
+  Transaction: () => import('#controllers/transaction_controller'),
   User: () => import('#controllers/user_controller'),
 }

@@ -1,9 +1,17 @@
 import { test } from '@japa/runner'
+import app from '@adonisjs/core/services/app'
 import User from '#models/user'
 import Client from '#models/client'
 import Gateway from '#models/gateway'
 import Product from '#models/product'
 import Transaction from '#models/transaction'
+import { GatewayService } from '#services/gateway/gateway_service'
+
+class MockGatewayService extends GatewayService {
+  constructor() {
+    super(new Map())
+  }
+}
 
 async function getAuthUser() {
   return User.create({ email: 'admin@betalent.tech', password: 'adminpass' })
@@ -23,6 +31,9 @@ test.group('GET /transactions', (group) => {
     await Product.query().delete()
     await Gateway.query().delete()
     await User.query().delete()
+
+    app.container.swap(GatewayService, () => new MockGatewayService())
+    return () => app.container.restore(GatewayService)
   })
 
   test('should list all transactions with related data', async ({ client, assert }) => {
@@ -78,6 +89,9 @@ test.group('GET /transactions/:id', (group) => {
     await Product.query().delete()
     await Gateway.query().delete()
     await User.query().delete()
+
+    app.container.swap(GatewayService, () => new MockGatewayService())
+    return () => app.container.restore(GatewayService)
   })
 
   test('should return transaction detail with client, gateway and product', async ({

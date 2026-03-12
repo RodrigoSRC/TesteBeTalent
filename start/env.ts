@@ -31,4 +31,8 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.string.optional(),
   DB_DATABASE: Env.schema.string(),
+
+  // Payment gateways (defaults: localhost:3001, localhost:3002)
+  GATEWAY1_URL: Env.schema.string.optional(),
+  GATEWAY2_URL: Env.schema.string.optional(),
 })

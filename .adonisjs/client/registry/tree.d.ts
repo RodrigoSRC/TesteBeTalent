@@ -20,4 +20,8 @@ export interface ApiDefinition {
     update: typeof routes['product.update']
     destroy: typeof routes['product.destroy']
   }
+  client: {
+    index: typeof routes['client.index']
+    show: typeof routes['client.show']
+  }
 }

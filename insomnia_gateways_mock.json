@@ -1,0 +1,132 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-03-13T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_gateways_mock",
+      "_type": "workspace",
+      "name": "Multi-Gateways Mock APIs",
+      "description": "Para iniciar os mocks:\ndocker run -p 3001:3001 -p 3002:3002 matheusprotzen/gateways-mock",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_gw_base",
+      "_type": "environment",
+      "parentId": "wrk_gateways_mock",
+      "name": "Base Environment",
+      "data": {
+        "gateway1_url": "http://localhost:3001",
+        "gateway2_url": "http://localhost:3002",
+        "gateway1_token": ""
+      }
+    },
+    {
+      "_id": "fld_gw1",
+      "_type": "request_group",
+      "parentId": "wrk_gateways_mock",
+      "name": "Gateway 1"
+    },
+    {
+      "_id": "req_gw1_login",
+      "_type": "request",
+      "parentId": "fld_gw1",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.gateway1_url }}/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"email\": \"dev@betalent.tech\",\n    \"token\": \"FEC9BB078BF338F464F96B48089EB498\"\n}"
+      }
+    },
+    {
+      "_id": "req_gw1_list",
+      "_type": "request",
+      "parentId": "fld_gw1",
+      "name": "List Transactions",
+      "method": "GET",
+      "url": "{{ _.gateway1_url }}/transactions",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.gateway1_token }}" }]
+    },
+    {
+      "_id": "req_gw1_create",
+      "_type": "request",
+      "parentId": "fld_gw1",
+      "name": "Create Transaction",
+      "method": "POST",
+      "url": "{{ _.gateway1_url }}/transactions",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.gateway1_token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"amount\": 1000,\n    \"name\": \"tester\",\n    \"email\": \"tester@email.com\",\n    \"cardNumber\": \"5569000000006063\",\n    \"cvv\": \"010\"\n}"
+      }
+    },
+    {
+      "_id": "req_gw1_chargeback",
+      "_type": "request",
+      "parentId": "fld_gw1",
+      "name": "Chargeback",
+      "method": "POST",
+      "url": "{{ _.gateway1_url }}/transactions/TRANSACTION_ID/charge_back",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.gateway1_token }}" }],
+      "body": { "mimeType": "application/json", "text": "" }
+    },
+    {
+      "_id": "fld_gw2",
+      "_type": "request_group",
+      "parentId": "wrk_gateways_mock",
+      "name": "Gateway 2"
+    },
+    {
+      "_id": "req_gw2_list",
+      "_type": "request",
+      "parentId": "fld_gw2",
+      "name": "Listar Transações",
+      "method": "GET",
+      "url": "{{ _.gateway2_url }}/transacoes",
+      "headers": [
+        { "name": "Gateway-Auth-Token", "value": "tk_f2198cc671b5289fa856" },
+        { "name": "Gateway-Auth-Secret", "value": "3d15e8ed6131446ea7e3456728b1211f" }
+      ]
+    },
+    {
+      "_id": "req_gw2_create",
+      "_type": "request",
+      "parentId": "fld_gw2",
+      "name": "Criar Transação",
+      "method": "POST",
+      "url": "{{ _.gateway2_url }}/transacoes",
+      "headers": [
+        { "name": "Gateway-Auth-Token", "value": "tk_f2198cc671b5289fa856" },
+        { "name": "Gateway-Auth-Secret", "value": "3d15e8ed6131446ea7e3456728b1211f" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"valor\": 1000,\n    \"nome\": \"tester\",\n    \"email\": \"tester@email.com\",\n    \"numeroCartao\": \"5569000000006063\",\n    \"cvv\": \"010\"\n}"
+      }
+    },
+    {
+      "_id": "req_gw2_reembolso",
+      "_type": "request",
+      "parentId": "fld_gw2",
+      "name": "Reembolso",
+      "method": "POST",
+      "url": "{{ _.gateway2_url }}/transacoes/reembolso",
+      "headers": [
+        { "name": "Gateway-Auth-Token", "value": "tk_f2198cc671b5289fa856" },
+        { "name": "Gateway-Auth-Secret", "value": "3d15e8ed6131446ea7e3456728b1211f" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"id\": \"TRANSACTION_ID\"\n}"
+      }
+    }
+  ]
+}

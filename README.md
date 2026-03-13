@@ -528,4 +528,31 @@ node ace test --files="tests/functional/purchase.spec.ts"
 | GET /transactions             | 3      |
 | GET /transactions/:id         | 3      |
 | CRUD de Usuários              | 7      |
-| **Total**                     | **60** |
+| PATCH /gateways/:id/toggle    | 4      |
+| PATCH /gateways/:id/priority  | 5      |
+| **Total**                     | **69** |
+
+---
+
+## Collections para Teste Manual
+
+O projeto inclui duas collections no formato **Insomnia** para facilitar o teste manual das APIs:
+
+| Arquivo                                                      | Descrição                                    |
+| ------------------------------------------------------------ | -------------------------------------------- |
+| [`insomnia_collection.json`](insomnia_collection.json)       | Rotas da API BeTalent (porta 3333)           |
+| [`insomnia_gateways_mock.json`](insomnia_gateways_mock.json) | Rotas dos gateways mock (portas 3001 e 3002) |
+
+### Como importar no Insomnia
+
+1. Abra o Insomnia
+2. Clique em **Import** → **File**
+3. Selecione o arquivo `.json` desejado
+
+### Fluxo básico de teste
+
+1. **Login** (`POST /login`) → copie o `token` da resposta
+2. Vá em **Environments** no Insomnia e cole o valor na variável `token`
+3. Todas as rotas protegidas usarão o token automaticamente via `Bearer {{ _.token }}`
+
+> As credenciais padrão do admin são `admin@betalent.tech` / `secret123` (criadas pelo seeder).

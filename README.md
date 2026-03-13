@@ -538,9 +538,9 @@ node ace test --files="tests/functional/purchase.spec.ts"
 
 O projeto inclui duas collections no formato **Insomnia** para facilitar o teste manual das APIs:
 
-| Arquivo | Descrição |
-| ------- | --------- |
-| [`insomnia_collection.json`](insomnia_collection.json) | Rotas da API BeTalent (porta 3333) |
+| Arquivo                                                      | Descrição                                    |
+| ------------------------------------------------------------ | -------------------------------------------- |
+| [`insomnia_collection.json`](insomnia_collection.json)       | Rotas da API BeTalent (porta 3333)           |
 | [`insomnia_gateways_mock.json`](insomnia_gateways_mock.json) | Rotas dos gateways mock (portas 3001 e 3002) |
 
 ### Como importar no Insomnia

@@ -47,9 +47,7 @@
       "name": "Logout",
       "method": "POST",
       "url": "{{ _.base_url }}/logout",
-      "headers": [
-        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
-      ],
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
       "body": { "mimeType": "application/json", "text": "" }
     },
     {

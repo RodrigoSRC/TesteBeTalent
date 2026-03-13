@@ -73,9 +73,7 @@
       "name": "Chargeback",
       "method": "POST",
       "url": "{{ _.gateway1_url }}/transactions/TRANSACTION_ID/charge_back",
-      "headers": [
-        { "name": "Authorization", "value": "Bearer {{ _.gateway1_token }}" }
-      ],
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.gateway1_token }}" }],
       "body": { "mimeType": "application/json", "text": "" }
     },
     {

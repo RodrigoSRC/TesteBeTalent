@@ -21,8 +21,8 @@ export class Gateway1Provider implements GatewayProvider {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: 'dev@betalent.tech',
-        token: 'FEC9BB078BF338F464F96B48089EB498',
+        email: env.get('GATEWAY1_AUTH_EMAIL') ?? 'dev@betalent.tech',
+        token: env.get('GATEWAY1_AUTH_TOKEN') ?? 'FEC9BB078BF338F464F96B48089EB498',
       }),
     })
 

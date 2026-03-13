@@ -17,8 +17,8 @@ export class Gateway2Provider implements GatewayProvider {
   constructor() {
     this.baseUrl = env.get('GATEWAY2_URL') ?? 'http://localhost:3002'
     this.authHeaders = {
-      'Gateway-Auth-Token': 'tk_f2198cc671b5289fa856',
-      'Gateway-Auth-Secret': '3d15e8ed6131446ea7e3456728b1211f',
+      'Gateway-Auth-Token': env.get('GATEWAY2_AUTH_TOKEN') ?? 'tk_f2198cc671b5289fa856',
+      'Gateway-Auth-Secret': env.get('GATEWAY2_AUTH_SECRET') ?? '3d15e8ed6131446ea7e3456728b1211f',
     }
   }
 

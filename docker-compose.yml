@@ -4,8 +4,8 @@ services:
     container_name: betalent-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: betalent
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_DATABASE:-betalent}
     ports:
       - '3306:3306'
     volumes:
@@ -32,13 +32,19 @@ services:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
-      - DB_PASSWORD=root
-      - DB_DATABASE=betalent
+      - DB_PASSWORD=${DB_PASSWORD:-root}
+      - DB_DATABASE=${DB_DATABASE:-betalent}
       - APP_KEY=${APP_KEY}
       - LOG_LEVEL=info
       - SESSION_DRIVER=memory
       - GATEWAY1_URL=http://gateways:3001
       - GATEWAY2_URL=http://gateways:3002
+      - GATEWAY2_AUTH_TOKEN=${GATEWAY2_AUTH_TOKEN:-tk_f2198cc671b5289fa856}
+      - GATEWAY2_AUTH_SECRET=${GATEWAY2_AUTH_SECRET:-3d15e8ed6131446ea7e3456728b1211f}
+      - GATEWAY1_AUTH_EMAIL=${GATEWAY1_AUTH_EMAIL:-dev@betalent.tech}
+      - GATEWAY1_AUTH_TOKEN=${GATEWAY1_AUTH_TOKEN:-FEC9BB078BF338F464F96B48089EB498}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@betalent.tech}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-secret123}
     depends_on:
       mysql:
         condition: service_healthy

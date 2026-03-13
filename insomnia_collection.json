@@ -1,0 +1,298 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-03-13T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_betalent",
+      "_type": "workspace",
+      "name": "BeTalent API",
+      "description": "Multi-gateway payment API",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_betalent",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3333",
+        "token": ""
+      }
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.base_url }}/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@betalent.tech\",\n  \"password\": \"secret123\"\n}"
+      }
+    },
+    {
+      "_id": "req_logout",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Logout",
+      "method": "POST",
+      "url": "{{ _.base_url }}/logout",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": { "mimeType": "application/json", "text": "" }
+    },
+    {
+      "_id": "fld_users",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Users"
+    },
+    {
+      "_id": "req_users_list",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "List Users",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_users_show",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "Show User",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_users_create",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "Create User",
+      "method": "POST",
+      "url": "{{ _.base_url }}/users",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+      }
+    },
+    {
+      "_id": "req_users_update",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "Update User",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/users/1",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"updated@example.com\",\n  \"password\": \"newpassword123\"\n}"
+      }
+    },
+    {
+      "_id": "req_users_delete",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "Delete User",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/users/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "fld_products",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Products"
+    },
+    {
+      "_id": "req_products_list",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "List Products",
+      "method": "GET",
+      "url": "{{ _.base_url }}/products",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_products_show",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Show Product",
+      "method": "GET",
+      "url": "{{ _.base_url }}/products/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_products_create",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Create Product",
+      "method": "POST",
+      "url": "{{ _.base_url }}/products",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Product Name\",\n  \"amount\": 10000\n}"
+      }
+    },
+    {
+      "_id": "req_products_update",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Update Product",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/products/1",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Product\",\n  \"amount\": 15000\n}"
+      }
+    },
+    {
+      "_id": "req_products_delete",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Delete Product",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/products/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "fld_purchases",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Purchases"
+    },
+    {
+      "_id": "req_purchase",
+      "_type": "request",
+      "parentId": "fld_purchases",
+      "name": "Create Purchase",
+      "method": "POST",
+      "url": "{{ _.base_url }}/purchases",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"productId\": 1,\n  \"quantity\": 2,\n  \"client\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\"\n  },\n  \"card\": {\n    \"number\": \"5569000000006063\",\n    \"cvv\": \"010\"\n  }\n}"
+      }
+    },
+    {
+      "_id": "fld_clients",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Clients"
+    },
+    {
+      "_id": "req_clients_list",
+      "_type": "request",
+      "parentId": "fld_clients",
+      "name": "List Clients",
+      "method": "GET",
+      "url": "{{ _.base_url }}/clients",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_clients_show",
+      "_type": "request",
+      "parentId": "fld_clients",
+      "name": "Show Client (with purchases)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/clients/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "fld_transactions",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Transactions"
+    },
+    {
+      "_id": "req_transactions_list",
+      "_type": "request",
+      "parentId": "fld_transactions",
+      "name": "List Transactions",
+      "method": "GET",
+      "url": "{{ _.base_url }}/transactions",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_transactions_show",
+      "_type": "request",
+      "parentId": "fld_transactions",
+      "name": "Show Transaction",
+      "method": "GET",
+      "url": "{{ _.base_url }}/transactions/1",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }]
+    },
+    {
+      "_id": "req_transactions_refund",
+      "_type": "request",
+      "parentId": "fld_transactions",
+      "name": "Refund Transaction",
+      "method": "POST",
+      "url": "{{ _.base_url }}/transactions/1/refund",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": { "mimeType": "application/json", "text": "" }
+    },
+    {
+      "_id": "fld_gateways",
+      "_type": "request_group",
+      "parentId": "wrk_betalent",
+      "name": "Gateways"
+    },
+    {
+      "_id": "req_gateway_toggle",
+      "_type": "request",
+      "parentId": "fld_gateways",
+      "name": "Toggle Gateway",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/gateways/1/toggle",
+      "headers": [{ "name": "Authorization", "value": "Bearer {{ _.token }}" }],
+      "body": { "mimeType": "application/json", "text": "" }
+    },
+    {
+      "_id": "req_gateway_priority",
+      "_type": "request",
+      "parentId": "fld_gateways",
+      "name": "Update Gateway Priority",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/gateways/1/priority",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"priority\": 1\n}"
+      }
+    }
+  ]
+}

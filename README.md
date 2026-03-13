@@ -96,25 +96,20 @@ O `GatewayService` é o núcleo do sistema: ele consulta os gateways ativos orde
 
    Isso inicia:
    - `betalent-mysql` — MySQL 8.0 na porta `3306`
-   - `betalent-app` — API AdonisJS na porta `3333`
+   - `betalent-app` — API AdonisJS na porta `3333` (migrations e seed rodam automaticamente)
    - `betalent-gateways` — Servidores mock dos gateways nas portas `3001` e `3002`
 
-4. **Execute as migrations e seeders:**
-
-   ```bash
-   docker exec betalent-app node ace migration:run
-   docker exec betalent-app node ace db:seed
-   ```
-
-5. **Acesse a API:**
+4. **Acesse a API:**
    ```
    http://localhost:3333
    ```
 
-> **Credenciais padrão do admin** (criadas pelo seeder):
+> **Credenciais padrão do admin** (criadas automaticamente pelo seeder):
 >
 > - Email: `admin@betalent.tech`
 > - Senha: `secret123`
+>
+> Não há rota pública de registro. Novos usuários são criados por um admin autenticado via `POST /users`.
 
 ---
 

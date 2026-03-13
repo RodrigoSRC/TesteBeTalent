@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ["node", "ace", "serve", "--hmr"]
+CMD node ace migration:run && node ace db:seed && node ace serve --hmr
